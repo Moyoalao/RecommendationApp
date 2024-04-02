@@ -94,9 +94,10 @@
 		E48FC5882BBC31C900309877 /* RecommendationApp */ = {
 			isa = PBXGroup;
 			children = (
-				E48FC5892BBC31C900309877 /* RecommendationAppApp.swift */,
-				E48FC58B2BBC31C900309877 /* ContentView.swift */,
-				E48FC58D2BBC31CA00309877 /* Assets.xcassets */,
+				E48FC5B62BBC476100309877 /* Views */,
+				E48FC5B52BBC475200309877 /* ViewModels */,
+				E48FC5B42BBC474400309877 /* Models */,
+				E48FC5B32BBC469D00309877 /* Other */,
 				E48FC58F2BBC31CA00309877 /* Preview Content */,
 			);
 			path = RecommendationApp;
@@ -125,6 +126,37 @@
 				E48FC5A62BBC31CB00309877 /* RecommendationAppUITestsLaunchTests.swift */,
 			);
 			path = RecommendationAppUITests;
+			sourceTree = "<group>";
+		};
+		E48FC5B32BBC469D00309877 /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				E48FC5892BBC31C900309877 /* RecommendationAppApp.swift */,
+			);
+			path = Other;
+			sourceTree = "<group>";
+		};
+		E48FC5B42BBC474400309877 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				E48FC58D2BBC31CA00309877 /* Assets.xcassets */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		E48FC5B52BBC475200309877 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		E48FC5B62BBC476100309877 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				E48FC58B2BBC31C900309877 /* ContentView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
