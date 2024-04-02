@@ -44,6 +44,7 @@
 		E48FC5A02BBC31CB00309877 /* RecommendationAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RecommendationAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E48FC5A42BBC31CB00309877 /* RecommendationAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationAppUITests.swift; sourceTree = "<group>"; };
 		E48FC5A62BBC31CB00309877 /* RecommendationAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		E48FC5B72BBC51C800309877 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +75,7 @@
 		E48FC57D2BBC31C900309877 = {
 			isa = PBXGroup;
 			children = (
+				E48FC5B72BBC51C800309877 /* README.md */,
 				E48FC5882BBC31C900309877 /* RecommendationApp */,
 				E48FC5992BBC31CA00309877 /* RecommendationAppTests */,
 				E48FC5A32BBC31CB00309877 /* RecommendationAppUITests */,
