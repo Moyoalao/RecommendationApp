@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct DashboardView: View {
+    
     @StateObject var viewModel = DashboardViewModel()
     private let userID: String
     
@@ -17,25 +18,39 @@ struct DashboardView: View {
 
     var body: some View {
         NavigationView {
-            List(viewModel.movies) { movie in
-                HStack {
-                    if let posterURL = movie.posterURL, let imageData = try? Data(contentsOf: posterURL), let uiImage = UIImage(data: imageData) {
-                        Image(uiImage: uiImage)
-                            .resizable()
+            
+            List(viewModel.filteredMovies) { movie in
+                NavigationLink(destination: MovieDetailView(movie: movie)){
+                    HStack {
+                        //display movie title and date of release
+                        if let posterURL = URL(string: "https://image.tmdb.org/t/p/w500\(movie.posterPath)") {
+                            AsyncImage(url: posterURL) { phase in
+                                if let image = phase.image {
+                                    image.resizable() // Display the loaded image.
+                                } else if phase.error != nil {
+                                    Image(systemName: "photo") // Placeholder for an error.
+                                        .accessibilityLabel("Error loading image")
+                                } else {
+                                    ProgressView() // Loading state.
+                                }
+                            }
                             .frame(width: 100, height: 150)
                             .cornerRadius(8)
-                    }
-                    
-                    VStack(alignment: .leading) {
-                        Text(movie.title)
-                            .foregroundColor(.primary)
-                            .font(.headline)
-                        Text(movie.releaseDate)
-                            .foregroundColor(.secondary)
-                            .font(.subheadline)
+                        }
+
+                        
+                        VStack(alignment: .leading) {
+                            Text(movie.title)
+                                .foregroundColor(.primary)
+                                .font(.headline)
+                            Text(movie.releaseDate)
+                                .foregroundColor(.secondary)
+                                .font(.subheadline)
+                        }
                     }
                 }
             }
+            .searchable(text: $viewModel.searchText)
             .navigationTitle("Dashboard")
             .onAppear {
                 viewModel.getMovies()

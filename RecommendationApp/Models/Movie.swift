@@ -34,4 +34,5 @@ struct myMovie: Codable, Hashable, Identifiable {
         case releaseDate = "release_date"
         case posterPath = "poster_path"
     }
+    
 }

@@ -41,6 +41,9 @@
 		E48FC5F02BBCD8CD00309877 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E48FC5EF2BBCD8CD00309877 /* HeaderView.swift */; };
 		E48FC5F22BBCD96D00309877 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E48FC5F12BBCD96D00309877 /* CustomButton.swift */; };
 		E48FC5F42BBCD9BE00309877 /* DashboardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E48FC5F32BBCD9BE00309877 /* DashboardViewModel.swift */; };
+		E48FC5FA2BBD8B5900309877 /* WatchLaterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E48FC5F92BBD8B5900309877 /* WatchLaterView.swift */; };
+		E48FC5FC2BBD8B7D00309877 /* WatchLaterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E48FC5FB2BBD8B7D00309877 /* WatchLaterViewModel.swift */; };
+		E48FC5FE2BBDC8A800309877 /* MovieDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E48FC5FD2BBDC8A800309877 /* MovieDetailView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -90,6 +93,9 @@
 		E48FC5F12BBCD96D00309877 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		E48FC5F32BBCD9BE00309877 /* DashboardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewModel.swift; sourceTree = "<group>"; };
 		E48FC5F72BBCF07B00309877 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E48FC5F92BBD8B5900309877 /* WatchLaterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchLaterView.swift; sourceTree = "<group>"; };
+		E48FC5FB2BBD8B7D00309877 /* WatchLaterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchLaterViewModel.swift; sourceTree = "<group>"; };
+		E48FC5FD2BBDC8A800309877 /* MovieDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -215,6 +221,7 @@
 				E48FC5E72BBCCEE500309877 /* LoginViewModel.swift */,
 				E48FC5EB2BBCD54A00309877 /* RegisterViewModel.swift */,
 				E48FC5F32BBCD9BE00309877 /* DashboardViewModel.swift */,
+				E48FC5FB2BBD8B7D00309877 /* WatchLaterViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -229,6 +236,8 @@
 				E48FC5DF2BBC920400309877 /* DashboardView.swift */,
 				E48FC5EF2BBCD8CD00309877 /* HeaderView.swift */,
 				E48FC5F12BBCD96D00309877 /* CustomButton.swift */,
+				E48FC5F92BBD8B5900309877 /* WatchLaterView.swift */,
+				E48FC5FD2BBDC8A800309877 /* MovieDetailView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -392,8 +401,10 @@
 				E48FC5D82BBC822000309877 /* User.swift in Sources */,
 				E48FC5E82BBCCEE500309877 /* LoginViewModel.swift in Sources */,
 				E48FC5EC2BBCD54A00309877 /* RegisterViewModel.swift in Sources */,
+				E48FC5FA2BBD8B5900309877 /* WatchLaterView.swift in Sources */,
 				E48FC5DE2BBC83E000309877 /* MainView.swift in Sources */,
 				E48FC5E42BBC989C00309877 /* ProfileViewModel.swift in Sources */,
+				E48FC5FC2BBD8B7D00309877 /* WatchLaterViewModel.swift in Sources */,
 				E48FC5D62BBC7FA700309877 /* Extension.swift in Sources */,
 				E48FC5F42BBCD9BE00309877 /* DashboardViewModel.swift in Sources */,
 				E48FC5E02BBC920400309877 /* DashboardView.swift in Sources */,
@@ -402,6 +413,7 @@
 				E48FC5EA2BBCD53700309877 /* RegisterView.swift in Sources */,
 				E48FC5E62BBCCECA00309877 /* LoginView.swift in Sources */,
 				E48FC5DC2BBC833500309877 /* MainViewModel.swift in Sources */,
+				E48FC5FE2BBDC8A800309877 /* MovieDetailView.swift in Sources */,
 				E48FC5F02BBCD8CD00309877 /* HeaderView.swift in Sources */,
 				E48FC5F22BBCD96D00309877 /* CustomButton.swift in Sources */,
 			);

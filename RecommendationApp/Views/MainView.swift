@@ -24,6 +24,7 @@ struct MainView: View {
     private var mainTabView: some View {
         TabView{
             dashboardTab
+            watchLaterTab
             profileTab
         }
     }
@@ -42,6 +43,13 @@ struct MainView: View {
             }
     }
     
+    
+    private var watchLaterTab: some View {
+        WatchLaterView()
+            .tabItem {
+                Label("WatchList", systemImage: "list.bullet.rectangle.portrait.fill")
+            }
+    }
     
 }
 
