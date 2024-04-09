@@ -8,7 +8,10 @@
 import SwiftUI
 
 struct MovieDetailView: View {
+    
     let movie: myMovie
+    @ObservedObject var watchLaterViewModel = WatchLaterViewModel()
+    var userId: String
     
     var body: some View {
         ScrollView {
@@ -41,6 +44,15 @@ struct MovieDetailView: View {
                 Text(movie.overview)
                     .font(.body)
                     .padding()
+                
+                Button("Add To List") {
+                    watchLaterViewModel.addMovie(movie: movie, userId: userId)
+                        
+                }
+                .padding()
+                .background(Color.blue)
+                .foregroundColor(.white)
+                .cornerRadius(8)
             }
         }
         .navigationTitle("Movie Details")
@@ -60,6 +72,6 @@ struct Movie: Identifiable {
 // Preview Provider
 struct MovieDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        MovieDetailView(movie: myMovie(id: 1, title: "Example Movie", overview: "This is a detailed overview of the movie, describing what it is about, its themes, and major plot points.", releaseDate: "2023-01-01", posterPath: "/pathToExampleMoviePoster.jpg", genreIds: [], ratings: 2.2))
+        MovieDetailView(movie: myMovie(id: 1, title: "Example Movie", overview: "This is a detailed overview of the movie, describing what it is about, its themes, and major plot points.", releaseDate: "2023-01-01", posterPath: "/pathToExampleMoviePoster.jpg", genreIds: [], ratings: 2.2), userId: "")
     }
 }

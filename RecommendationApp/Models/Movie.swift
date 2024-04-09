@@ -50,3 +50,23 @@ struct myMovie: Codable, Hashable, Identifiable {
     }
     
 }
+
+extension myMovie {
+    var dictionary: [String: Any] {
+        var dict = [String: Any]()
+        dict["id"] = id
+        dict["title"] = title
+        dict["overview"] = overview
+        dict["releaseDate"] = releaseDate
+        dict["posterPath"] = posterPath
+        dict["genreIds"] = genreIds
+        dict["ratings"] = ratings
+        
+        // Optional property: Include only if it's not nil
+        if let genreNames = genreNames {
+            dict["genreNames"] = genreNames
+        }
+
+        return dict
+    }
+}

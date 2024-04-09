@@ -135,6 +135,7 @@
 			isa = PBXGroup;
 			children = (
 				E48FC5B92BBC528F00309877 /* README.md */,
+				E48FC5BA2BBC557E00309877 /* GoogleService-Info.plist */,
 				E48FC5F72BBCF07B00309877 /* Info.plist */,
 				E48FC5882BBC31C900309877 /* RecommendationApp */,
 				E48FC5992BBC31CA00309877 /* RecommendationAppTests */,
@@ -157,7 +158,6 @@
 		E48FC5882BBC31C900309877 /* RecommendationApp */ = {
 			isa = PBXGroup;
 			children = (
-				E48FC5BA2BBC557E00309877 /* GoogleService-Info.plist */,
 				E48FC5B32BBC469D00309877 /* Other */,
 				E48FC5B42BBC474400309877 /* Models */,
 				E48FC5B62BBC476100309877 /* Views */,

@@ -21,7 +21,7 @@ struct DashboardView: View {
         NavigationView {
             List {// Use the movies array directly
                 ForEach(viewModel.movies, id: \.id) {movie in // displays the movies in the array in a row
-                    NavigationLink(destination: MovieDetailView(movie: movie)) {// link to the details view of the movie
+                    NavigationLink(destination: MovieDetailView(movie: movie, userId: userID)) {// link to the details view of the movie
                         MovieRow(movie: movie)
                         
                     }
