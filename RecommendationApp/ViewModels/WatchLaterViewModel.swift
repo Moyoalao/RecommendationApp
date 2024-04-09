@@ -6,3 +6,16 @@
 //
 
 import Foundation
+import Firebase
+import Combine
+
+
+class WatchLaterViewModel: ObservableObject {
+   
+    private var db = Firestore.firestore()
+    
+    @Published var watchList: [myMovie] = []
+    
+    
+    
+}

@@ -18,6 +18,8 @@ struct User: Codable {
     /// The email address of the user.
     let email: String
     
+    let password: String
+    
     /// The timestamp of when the user joined.
     /// Measured in seconds since 1970 (also known as Unix time).
     let joined: TimeInterval

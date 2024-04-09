@@ -12,41 +12,37 @@ class DashboardViewModel: ObservableObject {
     
     //trigger UI updates
     @Published var movies: [myMovie] = []//fetched movies
-    @Published var filteredMovies: [myMovie] = []//filtered movies
-    @Published var searchText = "" //
+    @Published var genres: [Int: String] = [:]
     
     private var cancellables: Set<AnyCancellable> = []
+    private let apiKey = "4100576928222e78008dff8f63f4bf37"
+    private var page = 1
     
     init() {
-        //combine pipline to filter movies
-        $searchText
-            .removeDuplicates()
-            .debounce(for: 0.5, scheduler: RunLoop.main)
-            .sink(receiveValue: { [weak self] searchText in
-                if searchText.isEmpty {
-                    self?.getMovies()
-                }else {
-                    self?.filterMovies(searchText: searchText)
-                }
-            })
-            .store(in: &cancellables)
+        getGenres()
+        getMovies()
     }
     
+    
+
     // Method for connecting to the TMDb API and fetching popular movies
     func getMovies() {
-        let apiKey = "4100576928222e78008dff8f63f4bf37"
-        let urlString = "https://api.themoviedb.org/3/movie/popular?api_key=\(apiKey)&language=en-US&page=1"
-        
-        guard let url = URL(string: urlString) else { return }
-        
+        let urlString = "https://api.themoviedb.org/3/movie/popular?api_key=\(apiKey)&language=en-US&page=\(page)"
+        guard let url = URL(string: urlString) else {
+            return }
         URLSession.shared.dataTask(with: url) { [weak self] data, response, error in
                     guard let data = data, error == nil else { return }
                     
                     do {
                         let result = try JSONDecoder().decode(MovieSearch.self, from: data)
                         DispatchQueue.main.async {
-                            self?.movies = result.results
-                            self?.filteredMovies = result.results
+                            result.results.forEach { movie in
+                                var updateMovie = movie
+                                updateMovie.genreNames = movie.genreIds.compactMap { self?.genres[$0] }
+                                self?.movies.append(updateMovie)
+                            }
+                            self?.page += 1
+
                         }
                     } catch {
                         print("Decoding error: \(error)")
@@ -54,40 +50,34 @@ class DashboardViewModel: ObservableObject {
         }.resume()
     }
     
-    func searchMovies(searchText: String) {
-        let apiKey = "4100576928222e78008dff8f63f4bf37"
-        guard let query = searchText.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {return}
-        let searchURLString = "https://api.themoviedb.org/3/search/movie?api_key=\(apiKey)&query=\(query)"
-        
-        guard let url = URL(string: searchURLString) else {return}
-        
-        URLSession.shared.dataTask(with: url) { [weak self] data, _, error in
-            guard let data = data, error == nil else {return}
+    func getGenres() {
+         let urlString = "https://api.themoviedb.org/3/genre/movie/list?api_key=\(apiKey)&language=en-US"
+        guard let url = URL(string: urlString) else {return}
+        URLSession.shared.dataTask(with: url){[weak self] data, response, error in
+            guard let data = data, error == nil else { return}
             
-            do {
-                let result = try JSONDecoder().decode(MovieSearch.self, from: data)
+            do{
+                let genresResponse = try JSONDecoder().decode(GenreResponse.self, from: data )
                 DispatchQueue.main.async {
-                    self?.movies = result.results
-                    self?.filteredMovies = result.results
+                    self?.genres = genresResponse.genres.reduce(into: [Int: String]()) { $0[$1.id] = $1.name}
                 }
             }catch {
-                print("Decoding error: \(error)")//debugging
+                print("Error Decoding Genres: \(error)")
             }
         }.resume()
+        
     }
     
-    private func filterMovies(searchText: String) {
-        let trimmedSearchText = searchText.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
-        if trimmedSearchText.isEmpty {
-            filteredMovies = movies // diaplay movies when search empty
-        }else {
-            filteredMovies = movies.filter {$0.title.lowercased().contains(trimmedSearchText)}// display filtered search
-        }
-        //debugging
-        print ("search Text: \(searchText)")
-        print("Filtered Movies Count: \(filteredMovies.count)")
-    }
     
+}
+
+struct Genre: Codable, Identifiable {
+    let id: Int
+    let name: String
+}
+
+struct GenreResponse: Codable {
+    let genres: [Genre]
 }
 
 struct MovieSearch: Decodable {

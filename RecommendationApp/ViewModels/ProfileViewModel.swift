@@ -60,7 +60,8 @@ extension User {
         return User (
             id: data["id"] as? String ?? "",
             name: data["name"] as? String ?? "",
-            email: data["email"] as? String ?? "",
+            email: data["email"] as? String ?? "", 
+            password: data["password"] as? String ?? "",
             joined: data["joined"] as? TimeInterval ?? 0
         )
     }
