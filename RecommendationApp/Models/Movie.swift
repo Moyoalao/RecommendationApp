@@ -41,6 +41,7 @@ struct myMovie: Codable, Hashable, Identifiable {
         let name: String
     }
     
+    
     enum CodingKeys: String, CodingKey {
         case id, title, overview
         case releaseDate = "release_date"
@@ -57,10 +58,10 @@ extension myMovie {
         dict["id"] = id
         dict["title"] = title
         dict["overview"] = overview
-        dict["releaseDate"] = releaseDate
-        dict["posterPath"] = posterPath
-        dict["genreIds"] = genreIds
-        dict["ratings"] = ratings
+        dict["release_date"] = releaseDate
+        dict["poster_path"] = posterPath
+        dict["genre_ids"] = genreIds
+        dict["vote_average"] = ratings
         
         // Optional property: Include only if it's not nil
         if let genreNames = genreNames {

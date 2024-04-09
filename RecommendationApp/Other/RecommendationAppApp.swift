@@ -10,7 +10,7 @@ import FirebaseCore
 
 @main
 struct RecommendationAppApp: App {
-    
+    @StateObject var watchLaterViewModel = WatchLaterViewModel()
     init() {
         FirebaseApp.configure()
     }
@@ -18,6 +18,7 @@ struct RecommendationAppApp: App {
     var body: some Scene {
         WindowGroup {
             MainView()
+                .environmentObject(watchLaterViewModel)
         }
     }
 }

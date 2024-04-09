@@ -10,8 +10,12 @@ import SwiftUI
 struct MovieDetailView: View {
     
     let movie: myMovie
-    @ObservedObject var watchLaterViewModel = WatchLaterViewModel()
+    //@ObservedObject var watchLaterViewModel = WatchLaterViewModel()
+    @EnvironmentObject var viewModel: WatchLaterViewModel
     var userId: String
+    
+    
+
     
     var body: some View {
         ScrollView {
@@ -46,13 +50,14 @@ struct MovieDetailView: View {
                     .padding()
                 
                 Button("Add To List") {
-                    watchLaterViewModel.addMovie(movie: movie, userId: userId)
+                    viewModel.addMovie(movie: movie, userId: userId)
                         
                 }
                 .padding()
-                .background(Color.blue)
+                .background( Color.blue)
                 .foregroundColor(.white)
                 .cornerRadius(8)
+          
             }
         }
         .navigationTitle("Movie Details")

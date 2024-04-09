@@ -45,7 +45,7 @@ struct MainView: View {
     
     
     private var watchLaterTab: some View {
-        WatchLaterView()
+        WatchLaterView(userId: viewModel.currentID)
             .tabItem {
                 Label("WatchList", systemImage: "list.bullet.rectangle.portrait.fill")
             }
