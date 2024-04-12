@@ -53,8 +53,9 @@ struct MovieDetailView: View {
                     viewModel.addMovie(movie: movie, userId: userId)
                         
                 }
+                .disabled(viewModel.checkMovie(movieId: movie.id))
                 .padding()
-                .background( Color.blue)
+                .background( viewModel.checkMovie(movieId: movie.id) ? Color.gray : Color.blue)
                 .foregroundColor(.white)
                 .cornerRadius(8)
           

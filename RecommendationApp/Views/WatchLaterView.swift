@@ -14,7 +14,7 @@ struct WatchLaterView: View {
     var body: some View {
         NavigationView {
             List {
-                ForEach(viewModel.movies, id: \.id) { movie in
+                ForEach(viewModel.movies, id: \.self) { movie in
                     WatchList(movie: movie)
                         .swipeActions {
                             Button(role: .destructive) {
@@ -28,7 +28,7 @@ struct WatchLaterView: View {
             .onAppear {
                 viewModel.getList(userId: userId)
             }
-            .navigationBarTitle("Watch Later")
+            .navigationBarTitle("Watch List")
             .refreshable {
                 viewModel.getList(userId: userId)
             }
