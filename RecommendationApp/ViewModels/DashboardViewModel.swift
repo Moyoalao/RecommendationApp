@@ -50,6 +50,8 @@ class DashboardViewModel: ObservableObject {
         }.resume()
     }
     
+    //Similarity Calculations 
+    
     func getGenres() {
          let urlString = "https://api.themoviedb.org/3/genre/movie/list?api_key=\(apiKey)&language=en-US"
         guard let url = URL(string: urlString) else {return}

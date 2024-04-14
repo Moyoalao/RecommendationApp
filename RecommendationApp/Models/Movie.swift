@@ -7,30 +7,32 @@
 
 import Foundation
 
-/// Represents a movie with its associated metadata from TMDb API.
+// Represents a movie with its associated metadata from TMDb API.
 struct myMovie: Codable, Hashable, Identifiable {
-    /// The unique identifier for the movie.
+    // The unique identifier for the movie.
     var id: Int
     
-    /// The title of the movie.
+    // The title of the movie.
     var title: String
     
-    /// Overview of the movie.
+    // Overview of the movie.
     var overview: String
     
-    /// The release date of the movie.
+    // The release date of the movie.
     var releaseDate: String
     
-    /// The path to the movie poster image.
+    // The path to the movie poster image.
     var posterPath: String
     
+    // Genre IDs associated with the movie.
     var genreIds: [Int]
     
     var genreNames: [String]? 
     
+    // Average user rating of the movie.
     var ratings: Double
     
-    /// Computed property to get the full URL of the movie poster.
+    // Computed property to get the full URL of the movie poster.
     var posterURL: URL? {
         URL(string: "https://image.tmdb.org/t/p/w500\(posterPath)")
     }
@@ -41,7 +43,7 @@ struct myMovie: Codable, Hashable, Identifiable {
         let name: String
     }
     
-    
+    // Specifies the keys used to encode and decode data
     enum CodingKeys: String, CodingKey {
         case id, title, overview
         case releaseDate = "release_date"
@@ -52,6 +54,7 @@ struct myMovie: Codable, Hashable, Identifiable {
     
 }
 
+//  a dictionary representation of movie data , for interfacing with non-Swift systems and debugging
 extension myMovie {
     var dictionary: [String: Any] {
         var dict = [String: Any]()
