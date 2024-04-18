@@ -11,11 +11,12 @@ struct WatchLaterView: View {
     @EnvironmentObject var viewModel: WatchLaterViewModel
      let userId: String
     
+   
     var body: some View {
         NavigationView {
             List {
                 ForEach(viewModel.movies, id: \.self) { movie in
-                    WatchList(movie: movie)
+                    WatchList(movie: movie, userId: userId)
                         .swipeActions {
                             Button(role: .destructive) {
                                 viewModel.removeMovie(movieId: movie.id, userId: userId)
@@ -38,7 +39,13 @@ struct WatchLaterView: View {
     
     
     struct WatchList: View {
-        var movie: myMovie  // Assuming Movie is your model type
+        var movie: myMovie
+        let userId: String
+        
+        @EnvironmentObject var viewModel: WatchLaterViewModel
+        
+        @State private var showUserRating = false
+        @State private var tempRating: Double?
         
         var body: some View {
             HStack {
@@ -72,11 +79,67 @@ struct WatchLaterView: View {
                     Text("Rating: \(String(format: "%.1f", movie.ratings))")
                         .font(.caption)
                         .foregroundColor(.blue)
+                    if let userRating = movie.userRating {
+                        Text("User Rating: \(String(format: "%.1f", userRating))")
+                            .font(.caption)
+                            .foregroundColor(.gray)
+                    }
+                    
+                    Button("Rate") {
+                        tempRating = movie.userRating
+                        showUserRating = true
+                    }
+                    .padding(5)
+                    .background(Color.blue)
+                    .foregroundColor(.white)
+                    .cornerRadius(5)
+                    
                 }
                 .padding(.leading, 8)
-                
-                
+            
             }
+            .sheet(isPresented: $showUserRating) {
+                RatingView(userRating: $tempRating) { newRating in
+                    viewModel.userMovieRatings(movieId: movie.id, userRating: newRating, userId: userId)
+                    showUserRating = false
+                }
+            }
+            
         }
     }
+    
+    
+    struct RatingView: View {
+        @Binding var userRating: Double?
+        
+        let onSave: (Double) -> Void
+        
+        var body: some View {
+            
+            VStack {
+                Text("Rate movie").font(.headline)
+                Slider(value:  Binding(get: {
+                    self.userRating ?? 0
+                }, set: {
+                    self.userRating = $0
+                    
+                }), in: 0...10, step: 0.1)
+                
+                Text(String(format: "%.1f", self.userRating ?? 0)).font(.subheadline)
+                Button("Save Rating") {
+                    if let userRating = self.userRating {
+                        onSave(userRating)
+                    }
+                }
+                .padding()
+                .background(Color.blue)
+                .foregroundColor(.white)
+                .cornerRadius(8)
+            }
+            .padding()
+        }
+    }
+    
+    
 }
+

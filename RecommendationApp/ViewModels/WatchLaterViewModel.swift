@@ -14,7 +14,7 @@ class WatchLaterViewModel: ObservableObject {
     
     @Published var movies: [myMovie] = []
     @Published var watchList: Set<Int> = []
-    @Published var errorMessage: String? // For UI error reporting
+    @Published var errorMessage: String? //error reporting
     
     // Fetch the watch list IDs only, useful for checks without loading full movie data
     func checkWatchList(userId: String) {
@@ -65,10 +65,31 @@ class WatchLaterViewModel: ObservableObject {
         }
     }
     
+    //Users personal rating of the movie
+    func userMovieRatings (movieId: Int,userRating: Double, userId: String) {
+        let ref = db.collection("watchList").document(userId).collection("movies").document("\(movieId)")
+        ref.updateData(["userRating": userRating]) { error in
+            if let error = error {
+                DispatchQueue.main.async {
+                    self.errorMessage = "Error updating rating: \(error.localizedDescription)"
+                }
+            }else {
+                DispatchQueue.main.async {
+                    if let index = self.movies.firstIndex(where: { $0.id == movieId }) {
+                        self.movies[index].userRating = userRating
+                        print("Rating updated")
+                    }
+                }
+            }
+        }
+    }
     
+    
+    
+    //delete moview from WatchList
     func removeMovie(movieId: Int, userId: String) {
         let ref = db.collection("watchList").document(userId).collection("movies").document("\(movieId)")
-        
+    
         //remove from firestore
         ref.delete() { error in
             if let error = error {

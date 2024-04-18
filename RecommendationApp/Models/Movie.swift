@@ -32,6 +32,8 @@ struct myMovie: Codable, Hashable, Identifiable {
     // Average user rating of the movie.
     var ratings: Double
     
+    var userRating: Double?
+    
     // Computed property to get the full URL of the movie poster.
     var posterURL: URL? {
         URL(string: "https://image.tmdb.org/t/p/w500\(posterPath)")
@@ -50,6 +52,7 @@ struct myMovie: Codable, Hashable, Identifiable {
         case posterPath = "poster_path"
         case genreIds = "genre_ids"
         case ratings = "vote_average"
+        case userRating
     }
     
 }
@@ -65,7 +68,7 @@ extension myMovie {
         dict["poster_path"] = posterPath
         dict["genre_ids"] = genreIds
         dict["vote_average"] = ratings
-        
+        dict["userRating"] = userRating
         // Optional property: Include only if it's not nil
         if let genreNames = genreNames {
             dict["genreNames"] = genreNames
