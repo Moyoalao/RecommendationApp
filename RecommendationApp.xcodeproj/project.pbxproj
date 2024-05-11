@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E4288FCB2BEF100000AC870F /* TensorModel.py in Resources */ = {isa = PBXBuildFile; fileRef = E4288FCA2BEF100000AC870F /* TensorModel.py */; };
+		E4288FCD2BEF102B00AC870F /* server.py in Resources */ = {isa = PBXBuildFile; fileRef = E4288FCC2BEF102B00AC870F /* server.py */; };
+		E4288FCF2BEF109F00AC870F /* Flask.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4288FCE2BEF109F00AC870F /* Flask.swift */; };
 		E48FC58A2BBC31C900309877 /* RecommendationAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E48FC5892BBC31C900309877 /* RecommendationAppApp.swift */; };
 		E48FC58E2BBC31CA00309877 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E48FC58D2BBC31CA00309877 /* Assets.xcassets */; };
 		E48FC5912BBC31CA00309877 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E48FC5902BBC31CA00309877 /* Preview Assets.xcassets */; };
@@ -63,6 +66,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E4288FCA2BEF100000AC870F /* TensorModel.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = TensorModel.py; sourceTree = "<group>"; };
+		E4288FCC2BEF102B00AC870F /* server.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = server.py; sourceTree = "<group>"; };
+		E4288FCE2BEF109F00AC870F /* Flask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Flask.swift; sourceTree = "<group>"; };
 		E48FC5862BBC31C900309877 /* RecommendationApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RecommendationApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E48FC5892BBC31C900309877 /* RecommendationAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationAppApp.swift; sourceTree = "<group>"; };
 		E48FC58D2BBC31CA00309877 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -198,6 +204,8 @@
 				E48FC5D52BBC7FA700309877 /* Extension.swift */,
 				E48FC58D2BBC31CA00309877 /* Assets.xcassets */,
 				E48FC5D32BBC789700309877 /* Computing Project Logo v2 iOS Icon.jpg */,
+				E4288FCA2BEF100000AC870F /* TensorModel.py */,
+				E4288FCC2BEF102B00AC870F /* server.py */,
 			);
 			path = Other;
 			sourceTree = "<group>";
@@ -207,6 +215,7 @@
 			children = (
 				E48FC5D72BBC822000309877 /* User.swift */,
 				E48FC5D92BBC82DC00309877 /* Movie.swift */,
+				E4288FCE2BEF109F00AC870F /* Flask.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -364,8 +373,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				E48FC5D42BBC789700309877 /* Computing Project Logo v2 iOS Icon.jpg in Resources */,
+				E4288FCB2BEF100000AC870F /* TensorModel.py in Resources */,
 				E48FC5912BBC31CA00309877 /* Preview Assets.xcassets in Resources */,
 				E48FC5D22BBC641500309877 /* LaunchScreen.storyboard in Resources */,
+				E4288FCD2BEF102B00AC870F /* server.py in Resources */,
 				E48FC58E2BBC31CA00309877 /* Assets.xcassets in Resources */,
 				E48FC5BB2BBC557E00309877 /* GoogleService-Info.plist in Resources */,
 			);
@@ -400,6 +411,7 @@
 				E48FC5EC2BBCD54A00309877 /* RegisterViewModel.swift in Sources */,
 				E48FC5FA2BBD8B5900309877 /* WatchLaterView.swift in Sources */,
 				E48FC5DE2BBC83E000309877 /* MainView.swift in Sources */,
+				E4288FCF2BEF109F00AC870F /* Flask.swift in Sources */,
 				E48FC5E42BBC989C00309877 /* ProfileViewModel.swift in Sources */,
 				E48FC5FC2BBD8B7D00309877 /* WatchLaterViewModel.swift in Sources */,
 				E48FC5D62BBC7FA700309877 /* Extension.swift in Sources */,
