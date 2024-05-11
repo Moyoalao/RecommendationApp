@@ -10,6 +10,9 @@
 		E4288FCB2BEF100000AC870F /* TensorModel.py in Resources */ = {isa = PBXBuildFile; fileRef = E4288FCA2BEF100000AC870F /* TensorModel.py */; };
 		E4288FCD2BEF102B00AC870F /* server.py in Resources */ = {isa = PBXBuildFile; fileRef = E4288FCC2BEF102B00AC870F /* server.py */; };
 		E4288FCF2BEF109F00AC870F /* Flask.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4288FCE2BEF109F00AC870F /* Flask.swift */; };
+		E4288FD42BEF14A200AC870F /* LoginViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4288FD32BEF14A200AC870F /* LoginViewModelTest.swift */; };
+		E4288FD62BEF14DD00AC870F /* RegisterViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4288FD52BEF14DD00AC870F /* RegisterViewModelTests.swift */; };
+		E4288FD82BEF151A00AC870F /* DashboardViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4288FD72BEF151A00AC870F /* DashboardViewModelTests.swift */; };
 		E48FC58A2BBC31C900309877 /* RecommendationAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E48FC5892BBC31C900309877 /* RecommendationAppApp.swift */; };
 		E48FC58E2BBC31CA00309877 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E48FC58D2BBC31CA00309877 /* Assets.xcassets */; };
 		E48FC5912BBC31CA00309877 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E48FC5902BBC31CA00309877 /* Preview Assets.xcassets */; };
@@ -69,6 +72,9 @@
 		E4288FCA2BEF100000AC870F /* TensorModel.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = TensorModel.py; sourceTree = "<group>"; };
 		E4288FCC2BEF102B00AC870F /* server.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = server.py; sourceTree = "<group>"; };
 		E4288FCE2BEF109F00AC870F /* Flask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Flask.swift; sourceTree = "<group>"; };
+		E4288FD32BEF14A200AC870F /* LoginViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModelTest.swift; sourceTree = "<group>"; };
+		E4288FD52BEF14DD00AC870F /* RegisterViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModelTests.swift; sourceTree = "<group>"; };
+		E4288FD72BEF151A00AC870F /* DashboardViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewModelTests.swift; sourceTree = "<group>"; };
 		E48FC5862BBC31C900309877 /* RecommendationApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RecommendationApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E48FC5892BBC31C900309877 /* RecommendationAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationAppApp.swift; sourceTree = "<group>"; };
 		E48FC58D2BBC31CA00309877 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -183,6 +189,9 @@
 			isa = PBXGroup;
 			children = (
 				E48FC59A2BBC31CA00309877 /* RecommendationAppTests.swift */,
+				E4288FD32BEF14A200AC870F /* LoginViewModelTest.swift */,
+				E4288FD52BEF14DD00AC870F /* RegisterViewModelTests.swift */,
+				E4288FD72BEF151A00AC870F /* DashboardViewModelTests.swift */,
 			);
 			path = RecommendationAppTests;
 			sourceTree = "<group>";
@@ -431,7 +440,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E4288FD62BEF14DD00AC870F /* RegisterViewModelTests.swift in Sources */,
+				E4288FD42BEF14A200AC870F /* LoginViewModelTest.swift in Sources */,
 				E48FC59B2BBC31CA00309877 /* RecommendationAppTests.swift in Sources */,
+				E4288FD82BEF151A00AC870F /* DashboardViewModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
