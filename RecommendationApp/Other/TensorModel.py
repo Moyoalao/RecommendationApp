@@ -258,7 +258,7 @@ def recommend_movies(user_id, model, genre_encoder, tfidf_vectorizer, db, api_ke
     user_profile = generate_user_profile(user_watchlist, genre_encoder, tfidf_vectorizer, api_key)
     
     # get additional movies for potential recommendation
-    additional_movies = fetch_additional_movies(api_key, number_of_movies=850)
+    additional_movies = fetch_additional_movies(api_key, number_of_movies=250)
     
     # keep track of processed movie IDs to avoid redundancy
     processed_movie_ids = set()
