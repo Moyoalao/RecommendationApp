@@ -2,8 +2,7 @@
 //  ProfileViewModel.swift
 //  RecommendationApp
 //
-//  Created by Musibau Alao on 02/04/2024.
-//
+
 
 import Foundation
 import FirebaseFirestore
@@ -60,7 +59,7 @@ extension User {
         return User (
             id: data["id"] as? String ?? "",
             name: data["name"] as? String ?? "",
-            email: data["email"] as? String ?? "", 
+            email: data["email"] as? String ?? "",
             password: data["password"] as? String ?? "",
             joined: data["joined"] as? TimeInterval ?? 0
         )

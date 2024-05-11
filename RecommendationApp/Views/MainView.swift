@@ -2,13 +2,11 @@
 //  MainView.swift
 //  RecommendationApp
 //
-//  Created by Musibau Alao on 02/04/2024.
-//
 
 import SwiftUI
 
+//Main View
 struct MainView: View {
-    
     @StateObject var viewModel = MainViewModel()
     
     var body: some View {
@@ -20,7 +18,7 @@ struct MainView: View {
             LoginView()
         }
     }
-    
+    //Tabs for the sak of navigation
     private var mainTabView: some View {
         TabView{
             dashboardTab
@@ -28,14 +26,14 @@ struct MainView: View {
             profileTab
         }
     }
-    
+    //Dashboard where the users recommendatons would be loaded
     private var dashboardTab: some View {
         DashboardView(userID: viewModel.currentID)
             .tabItem {
                 Label("Home", systemImage: "house")
             }
     }
-    
+    //Displays the users details
     private var profileTab: some View {
         ProfileView()
             .tabItem {
@@ -43,7 +41,7 @@ struct MainView: View {
             }
     }
     
-    
+    //where movies the user added to their list is shown
     private var watchLaterTab: some View {
         WatchLaterView(userId: viewModel.currentID)
             .tabItem {

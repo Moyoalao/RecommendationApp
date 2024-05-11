@@ -2,15 +2,14 @@
 //  MovieDetailView.swift
 //  RecommendationApp
 //
-//  Created by Musibau Alao on 03/04/2024.
-//
 
 import SwiftUI
 
+//Displays the details of the movie
 struct MovieDetailView: View {
     
     let movie: myMovie
-    //@ObservedObject var watchLaterViewModel = WatchLaterViewModel()
+    
     @EnvironmentObject var viewModel: WatchLaterViewModel
     var userId: String
     
@@ -20,7 +19,7 @@ struct MovieDetailView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 10) {
-                if let posterURL = URL(string: "https://image.tmdb.org/t/p/w500\(movie.posterPath)") {
+                if let posterURL = URL(string: "https://image.tmdb.org/t/p/w500\(movie.posterPath ?? "no poster")") {
                     AsyncImage(url: posterURL) { image in
                         image.resizable()
                             .aspectRatio(contentMode: .fit)
@@ -30,6 +29,8 @@ struct MovieDetailView: View {
                     .cornerRadius(8)
                     .shadow(radius: 5)
                     .padding()
+                }else {
+                    Image(systemName: "photo").resizable().scaledToFit()
                 }
                 
                 Text(movie.title)
@@ -49,6 +50,7 @@ struct MovieDetailView: View {
                     .font(.body)
                     .padding()
                 
+                //adds the movie to the users watchlist when pressed
                 Button("Add To List") {
                     viewModel.addMovie(movie: movie, userId: userId)
                         
@@ -66,14 +68,7 @@ struct MovieDetailView: View {
     }
 }
 
-// Define a simple Movie model for this example
-struct Movie: Identifiable {
-    let id: Int
-    let title: String
-    let overview: String
-    let posterPath: String
-    let releaseDate: String
-}
+
 
 // Preview Provider
 struct MovieDetailView_Previews: PreviewProvider {

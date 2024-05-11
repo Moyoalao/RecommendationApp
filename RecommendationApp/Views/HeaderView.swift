@@ -2,8 +2,7 @@
 //  HeaderView.swift
 //  RecommendationApp
 //
-//  Created by Musibau Alao on 03/04/2024.
-//
+
 
 import SwiftUI
 
@@ -17,7 +16,7 @@ struct HeaderView: View {
         ZStack {
             
             background
-                .edgesIgnoringSafeArea(.all) 
+                .edgesIgnoringSafeArea(.all)
 
             VStack {
                 Text(title)

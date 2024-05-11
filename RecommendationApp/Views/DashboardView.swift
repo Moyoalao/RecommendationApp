@@ -2,107 +2,136 @@
 //  DashboardView.swift
 //  RecommendationApp
 //
-//  Created by Musibau Alao on 02/04/2024.
-//
 
 import SwiftUI
 
+//Displays the movies to the user
 struct DashboardView: View {
+    @StateObject private var viewModel: DashboardViewModel
     
-    @StateObject var viewModel = DashboardViewModel()
     private let userID: String
     
+    
+    //initialize the view for the user
     init(userID: String) {
         self.userID = userID
+        _viewModel = StateObject(wrappedValue: DashboardViewModel(userId: userID, seasion: URLSession.shared))
     }
 
     var body: some View {
-        
-        NavigationView {
-            List {// Use the movies array directly
-                ForEach(viewModel.movies, id: \.id) {movie in // displays the movies in the array in a row
-                    NavigationLink(destination: MovieDetailView(movie: movie, userId: userID)) {// link to the details view of the movie
-                        MovieRow(movie: movie)
-                        
+            NavigationView {
+                VStack{
+                    List {
+                        content
                     }
+                    .navigationBarTitle("Movies Dashboard")
+                    
+                    loadMoreButton
+                        .padding(.horizontal)
+                        .padding(.vertical, 8)
+                        .background(Color.blue)
+                        .cornerRadius(10)
+                        .foregroundColor(.white)
                     
                 }
-                //loads more movies if any
-                if !viewModel.movies.isEmpty {
-                    Button("More") {
-                        viewModel.getMovies()
-                    }
-                    .frame(maxWidth: .infinity)
-                    .padding()
-                    .background(Color.blue)
-                    .foregroundColor(.white)
-                    .cornerRadius(10)
-                }
-               
                 
+                .onAppear {
+                    //Gets the recommendations
+                    if viewModel.movies.isEmpty {
+                        viewModel.getRecommendations()
+                    }
+                }
             }
-            .navigationBarTitle("Movies")
         }
-        
+    
+    //Handle the state of conent loading , empty , movelist
+    @ViewBuilder
+    private var content: some View {
+        if viewModel.isLoading {
+            ProgressView("Fetching recommendations...")
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .transition(.scale.combined(with: .opacity))
+                .animation(.easeInOut(duration: 1.0), value: viewModel.isLoading)
+        } else if viewModel.movies.isEmpty{
+            Text("No recommendations available.")
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+        } else {
+            movieList
+        }
+    }
+
+    //Builds list of movies using MovieRow
+    private var movieList: some View {
+        ForEach(viewModel.movies, id: \.uuid) { movie in
+            NavigationLink(destination: MovieDetailView(movie: movie, userId: userID)) {
+                MovieRow(movie: movie)
+            }
+        }
     }
     
+    //Load Recommendations
+    private var loadMoreButton: some View {
+        Button("Load Recommendations") {
+            viewModel.movies.removeAll()
+            viewModel.getRecommendations()
+        }
+        .frame(maxWidth: .infinity)
+        .padding()
+     
+    }
 }
 
+
 struct MovieRow: View {
-    var movie: myMovie
+    var movie: myMovie // Use myMovie model
     
     var body: some View {
         HStack {
-            // Display movie poster and details
-            if let posterURL = URL(string: "https://image.tmdb.org/t/p/w500\(movie.posterPath)") {
-                AsyncImage(url: posterURL) { phase in
-                    switch phase {
-                    case .success(let image):
-                        image.resizable() // Display the loaded image.
-                    case .failure(_):
-                        Image(systemName: "photo") // Placeholder for an error.
-                            .accessibilityLabel("Error loading image")
-                    case .empty:
-                        ProgressView() // Loading state.
-                    @unknown default:
-                        EmptyView()
-                    }
-                }
-                .frame(width: 100, height: 150)
-                .cornerRadius(8)
-            }
-            
-            VStack(alignment: .leading) {
-                Text(movie.title)
-                    .foregroundColor(.primary)
-                    .font(.headline)
-                Text(movie.releaseDate)
-                    .foregroundColor(.secondary)
-                    .font(.subheadline)
-                if let genres = movie.genreNames , !genres.isEmpty {
-                    Text(genres.joined(separator: ", "))
-                        .font(.caption)
-                        .foregroundColor(.green)
-                } else {
-                    Text("No Genres")
-                        .font(.caption)
-                        .foregroundColor(.gray)
-                }
-                
-                Text("Rating: \(String(format: "%.1f", movie.ratings))")
-                    .font(.caption)
-                    .foregroundColor(.blue)
-            }
-            .padding(.leading, 8)
-            
-            
+            moviePoster
+            movieDetails
         }
-       
+    }
+    
+    //Loads and displays movie poster
+    private var moviePoster: some View {
+        AsyncImage(url: movie.posterURL) { phase in
+            switch phase {
+            case .success(let image):
+                image.resizable().scaledToFit()
+            case .failure:
+                Image(systemName: "photo").accessibilityLabel("Error loading image")
+            case .empty:
+                ProgressView()
+            @unknown default:
+                EmptyView()
+            }
+        }
+        .frame(width: 100, height: 150)
+        .cornerRadius(8)
+    }
+    
+    //Displays Details - title , release date , genres and rating
+    private var movieDetails: some View {
+        VStack(alignment: .leading) {
+            Text(movie.title)
+                .foregroundColor(.primary)
+                .font(.headline)
+            Text(movie.releaseDate)
+                .foregroundColor(.secondary)
+                .font(.subheadline)
+            genreText
+            Text("Rating: \(String(format: "%.1f", movie.ratings))")
+                .font(.caption)
+                .foregroundColor(.blue)
+        }
+        .padding(.leading, 8)
+    }
+    //Concatenates genres into string seprated by commas
+    private var genreText: some View {
+        Text(movie.genreNames?.joined(separator: ", ") ?? "No Genres")
+            .font(.caption)
+            .foregroundColor(movie.genreNames?.isEmpty ?? true ? .gray : .green)
     }
 }
 
-struct DashboardView_Previews: PreviewProvider {
-    static var previews: some View {
-        DashboardView(userID: " ")
-    }
-}
+

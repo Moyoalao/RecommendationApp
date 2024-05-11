@@ -2,13 +2,12 @@
 //  ProfileView.swift
 //  RecommendationApp
 //
-//  Created by Musibau Alao on 02/04/2024.
-//
 
 import SwiftUI
 
+//Displays the users details
 struct ProfileView: View {
-    
+    //getting and handling user data
     @StateObject var viewModel = ProfileViewModel()
     
     var body: some View {
@@ -34,6 +33,12 @@ struct ProfileView: View {
                         HStack {
                             Text("Since:").bold()
                             Text("\(Date(timeIntervalSince1970: user.joined).formatted(date: .abbreviated, time: .shortened))")
+                        }
+                        
+                        
+                        HStack {
+                            Text("For Your Inof:").bold()
+                            Text("To improve recommendations make sure to add movies to your watclist and secondly make sure that you rate them ")
                         }
                     }
                     .padding()

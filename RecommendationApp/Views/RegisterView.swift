@@ -2,13 +2,13 @@
 //  RegisterView.swift
 //  RecommendationApp
 //
-//  Created by Musibau Alao on 03/04/2024.
-//
 
 import SwiftUI
 
+//Registration page
 struct RegisterView: View {
     
+    //Registration logic
     @StateObject var viewModel = RegisterViewModel()
     
     var body: some View {
@@ -33,12 +33,18 @@ struct RegisterView: View {
                 
                 // Submit button
                 Button(action: viewModel.register) {
-                    Text("Submit").foregroundColor(.white)
+                    if viewModel.isLoading {
+                        ProgressView()
+                            .progressViewStyle(CircularProgressViewStyle(tint: .white))
+                    } else {
+                        Text("Login")
+                    }
                 }
-                .frame(maxWidth: .infinity)
                 .padding()
                 .background(Color.pink)
-                .cornerRadius(8)
+                .foregroundColor(.white)
+                .cornerRadius(5)
+                .disabled(viewModel.isLoading)  // Disable the button when loading
                 
                 // Display error message if any
                 if let errorMessage = viewModel.registrationError, !errorMessage.isEmpty {

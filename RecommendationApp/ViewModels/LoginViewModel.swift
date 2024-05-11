@@ -2,8 +2,7 @@
 //  LoginViewModel.swift
 //  RecommendationApp
 //
-//  Created by Musibau Alao on 03/04/2024.
-//
+
 
 import Foundation
 import FirebaseAuth
@@ -14,6 +13,9 @@ class LoginViewModel: ObservableObject {
     @Published var email = ""
     @Published var password = ""
     @Published var error = ""
+    @Published var isLoading = false
+    
+    
     
     init() {}
     
@@ -21,6 +23,7 @@ class LoginViewModel: ObservableObject {
     func login() {
         guard validate() else { return }
         
+        isLoading = true
         Auth.auth().signIn(withEmail: email, password: password) { [weak self] authResult, error in
             DispatchQueue.main.async {
                 if let error = error {
@@ -29,13 +32,31 @@ class LoginViewModel: ObservableObject {
                 } else {
                     // Successful authentication
                     self?.error = "" // Resetting error message
+                    print("Firebase Auth Error: \(String(describing: error))")
                 }
+                self?.isLoading = false
             }
         }
     }
     
+    //Validates format of email
+    private func emailCheck (_ email: String) -> Bool {
+        let check = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
+        return NSPredicate(format: "SELF MATCHES %@", check).evaluate(with: email)
+    }
+    //Validate the password fromat
+    private func passwordCheck(_ password: String) -> Bool {
+            let check = "^(?=.*[a-z])(?=.*[A-Z])(?=.*[@$!%*?&]).{8,}$" // Ensure password is 8+ characters long
+            if !NSPredicate(format: "SELF MATCHES %@", check).evaluate(with: password) {
+                error = "Password must include at least one lowercase letter, one uppercase letter, one special character, and be at least 8 characters long."
+                return false
+            }
+            return true
+        }
+
+    
     /// Validates user input.
-    private func validate() -> Bool {
+    internal func validate() -> Bool {
         error = "" // Resets error
         
         // Checking if email and password fields are not empty
@@ -44,15 +65,8 @@ class LoginViewModel: ObservableObject {
             error = "Please fill in all fields."
             return false
         }
-        
-        // Checking the email format
-        guard email.contains("@") && email.contains(".") else {
-            error = "Please use a valid email format."
-            return false
-        }
-        
-        // Input is valid
-        return true
+        //Rretun true when both validations are succesful
+        return emailCheck(email) && passwordCheck(password)
     }
 }
 

@@ -2,8 +2,6 @@
 //  LoginView.swift
 //  RecommendationApp
 //
-//  Created by Musibau Alao on 03/04/2024.
-//
 
 import SwiftUI
 
@@ -36,11 +34,21 @@ struct LoginView: View {
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                     
                     // Login button
-                    Button("Login", action: viewModel.login)
-                        .padding(10)
-                        .background(Color.pink)
-                        .foregroundColor(.white)
-                        .cornerRadius(5)
+                    Button(action: viewModel.login) {
+                        if viewModel.isLoading {
+                            ProgressView()
+                                .progressViewStyle(CircularProgressViewStyle(tint: .white))
+                        } else {
+                            Text("Login")
+                        }
+                    }
+                    .padding()
+                    .background(Color.pink)
+                    .foregroundColor(.white)
+                    .cornerRadius(5)
+                    .disabled(viewModel.isLoading)  // Disable the button when loading
+                    
+                    
                 }
                 
                 // Link to create account
