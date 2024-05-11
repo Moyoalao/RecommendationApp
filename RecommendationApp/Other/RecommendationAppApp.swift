@@ -6,12 +6,19 @@
 //
 
 import SwiftUI
+import FirebaseCore
 
 @main
 struct RecommendationAppApp: App {
+    @StateObject var watchLaterViewModel = WatchLaterViewModel()
+    init() {
+        FirebaseApp.configure()
+    }
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            MainView()
+                .environmentObject(watchLaterViewModel)
         }
     }
 }
