@@ -1,51 +1,34 @@
-//
-//  Movie.swift
-//  RecommendationApp
-//
-//  Created by Musibau Alao on 02/04/2024.
-//
-
 import Foundation
 
-// Represents a movie with its associated metadata from TMDb API.
 struct myMovie: Codable, Hashable, Identifiable {
-    // The unique identifier for the movie.
+    //The id of the movie
     var id: Int
-    
-    // The title of the movie.
+    //The title of the movie
     var title: String
-    
-    // Overview of the movie.
+    //The desctiption of the of the movie
     var overview: String
-    
-    // The release date of the movie.
+    //The original release date of the movie
     var releaseDate: String
-    
-    // The path to the movie poster image.
-    var posterPath: String
-    
-    // Genre IDs associated with the movie.
+    //The path to the poster held in optional string
+    var posterPath: String?
+    //The array of genre ids
     var genreIds: [Int]
-    
-    var genreNames: [String]? 
-    
-    // Average user rating of the movie.
+    //The  optional array of genre names
+    var genreNames: [String]?
+    //The avrage rating of the movie gotten from the TMDB
     var ratings: Double
-    
+    //The unique id
+    let uuid: UUID = UUID()
+    //The users own  rating
     var userRating: Double?
     
-    // Computed property to get the full URL of the movie poster.
+    // computes the full URL of the poster of the movie using posterpath
     var posterURL: URL? {
-        URL(string: "https://image.tmdb.org/t/p/w500\(posterPath)")
+        guard let path = posterPath else { return nil }
+        return URL(string: "https://image.tmdb.org/t/p/w500\(path)")
     }
     
-    struct Genre: Codable, Hashable, Identifiable {
-        let id: Int
-        
-        let name: String
-    }
-    
-    // Specifies the keys used to encode and decode data
+    //How properties map to JSON keys
     enum CodingKeys: String, CodingKey {
         case id, title, overview
         case releaseDate = "release_date"
@@ -54,10 +37,9 @@ struct myMovie: Codable, Hashable, Identifiable {
         case ratings = "vote_average"
         case userRating
     }
-    
 }
 
-//  a dictionary representation of movie data , for interfacing with non-Swift systems and debugging
+//converts myMovie to a dictionary for interacting with apis that need it in that format
 extension myMovie {
     var dictionary: [String: Any] {
         var dict = [String: Any]()
@@ -69,11 +51,9 @@ extension myMovie {
         dict["genre_ids"] = genreIds
         dict["vote_average"] = ratings
         dict["userRating"] = userRating
-        // Optional property: Include only if it's not nil
         if let genreNames = genreNames {
             dict["genreNames"] = genreNames
         }
-
         return dict
     }
 }
